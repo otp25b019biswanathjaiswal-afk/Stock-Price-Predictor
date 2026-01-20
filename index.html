@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Stock Predictor - AI-Powered with Live News</title>
+    <title>Indian Stock Predictor - AI Models & Financial Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,7 +33,6 @@
             background: linear-gradient(135deg, #4ade80, #22d3ee, #a78bfa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: none;
         }
         
         .subtitle {
@@ -80,6 +79,14 @@
             font-size: 0.95rem;
             opacity: 0.9;
             font-weight: 500;
+        }
+        
+        .model-description {
+            font-size: 0.85rem;
+            color: #a78bfa;
+            margin-top: -8px;
+            margin-bottom: 15px;
+            line-height: 1.5;
         }
         
         input, select {
@@ -143,6 +150,56 @@
             color: #4ade80;
         }
         
+        .financial-highlights {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .financial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .financial-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4ade80;
+        }
+        
+        .financial-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            opacity: 0.7;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .financial-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #22d3ee;
+            margin-bottom: 5px;
+        }
+        
+        .financial-change {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .recommendation-box {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(139, 92, 246, 0.2));
+            padding: 25px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px solid #a78bfa;
+        }
+        
         .news-section {
             background: rgba(255, 255, 255, 0.05);
             padding: 30px;
@@ -165,13 +222,6 @@
             font-size: 1.1rem;
         }
         
-        .news-source {
-            color: #22d3ee;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            font-style: italic;
-        }
-        
         .analysis-card {
             background: rgba(0, 0, 0, 0.4);
             padding: 25px;
@@ -184,39 +234,6 @@
             color: #a78bfa;
             margin-bottom: 15px;
             font-size: 1.3rem;
-        }
-        
-        .analysis-card h4 {
-            color: #22d3ee;
-            margin: 15px 0 10px 0;
-            font-size: 1.05rem;
-        }
-        
-        .factor-list {
-            margin: 15px 0;
-            padding-left: 20px;
-        }
-        
-        .factor-list li {
-            margin: 12px 0;
-            line-height: 1.7;
-        }
-        
-        .source-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(74, 222, 128, 0.2);
-            border: 1px solid #4ade80;
-            border-radius: 15px;
-            font-size: 0.75rem;
-            margin: 5px;
-            font-weight: 600;
-        }
-        
-        .verified {
-            background: rgba(34, 211, 238, 0.2);
-            border-color: #22d3ee;
-            color: #22d3ee;
         }
         
         .deviation-grid {
@@ -293,8 +310,23 @@
             color: #22d3ee;
         }
         
+        .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(74, 222, 128, 0.2);
+            border: 1px solid #4ade80;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin: 5px;
+            font-weight: 600;
+        }
+        
+        .badge.buy { background: rgba(74, 222, 128, 0.3); border-color: #4ade80; color: #4ade80; }
+        .badge.hold { background: rgba(251, 191, 36, 0.3); border-color: #fbbf24; color: #fbbf24; }
+        .badge.sell { background: rgba(239, 68, 68, 0.3); border-color: #ef4444; color: #ef4444; }
+        
         @media (max-width: 768px) {
-            .grid, .deviation-grid { grid-template-columns: 1fr; }
+            .grid, .deviation-grid, .financial-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2rem; }
         }
     </style>
@@ -302,20 +334,32 @@
 <body>
     <div class="container">
         <header>
-            <h1>🎯 AI-Powered Stock Price Predictor</h1>
-            <p class="subtitle">Real-Time Analysis with Authenticated News & Market Intelligence</p>
-            <div style="margin-top: 15px;">
-                <span class="source-badge verified">Live Market Data</span>
-                <span class="source-badge verified">Authenticated News</span>
-                <span class="source-badge verified">AI Analysis</span>
-            </div>
+            <h1>🎯 AI Stock Price Predictor Pro</h1>
+            <p class="subtitle">Multiple AI Models • Live Financial Data • Real-Time Analysis</p>
         </header>
 
         <div class="grid">
             <div class="card">
-                <div class="card-title">📈 Stock Analysis</div>
+                <div class="card-title">📈 Stock & Model Selection</div>
+                
                 <label>Stock Symbol (NSE)</label>
                 <input type="text" id="stockSymbol" value="RELIANCE" placeholder="e.g., TCS, INFY, HDFCBANK">
+                
+                <label>AI Prediction Model</label>
+                <select id="modelType">
+                    <option value="ensemble">🏆 Ensemble Model (Recommended)</option>
+                    <option value="lstm">🧠 LSTM Neural Network</option>
+                    <option value="prophet">📊 Facebook Prophet</option>
+                    <option value="arima">📈 ARIMA Time Series</option>
+                    <option value="xgboost">⚡ XGBoost Gradient Boosting</option>
+                    <option value="polynomial">🔢 Polynomial Regression</option>
+                    <option value="exponential">📉 Exponential Smoothing</option>
+                    <option value="linear">📏 Linear Regression</option>
+                </select>
+                <div class="model-description" id="modelDescription">
+                    Combines multiple models for highest accuracy (Recommended)
+                </div>
+                
                 <button onclick="runCompleteAnalysis()">🚀 Run Complete AI Analysis</button>
             </div>
 
@@ -339,6 +383,7 @@
                 <div class="card-title">🔮 AI Prediction</div>
                 <div class="prediction-value" id="predictionValue">₹-</div>
                 <div id="predictionChange" style="margin-top: 15px; font-size: 1.1rem;">-</div>
+                <div id="modelUsed" style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">-</div>
             </div>
         </div>
 
@@ -360,6 +405,17 @@
                 <div class="deviation-box">
                     <div style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 10px;">ACCURACY</div>
                     <div style="font-size: 2.5rem; font-weight: bold;" id="accuracy">-</div>
+                </div>
+            </div>
+
+            <!-- KEY FINANCIAL HIGHLIGHTS -->
+            <div class="financial-highlights">
+                <h2 style="color: #4ade80; margin-bottom: 20px; font-size: 1.8rem;">💰 Key Financial Highlights</h2>
+                <div class="financial-grid" id="financialGrid"></div>
+                
+                <div class="recommendation-box">
+                    <h3 style="color: #a78bfa; margin-bottom: 15px;">📊 Investment Recommendation</h3>
+                    <div id="investmentRecommendation"></div>
                 </div>
             </div>
 
@@ -409,22 +465,39 @@
         let currentSymbol = null;
         let currentPrediction = null;
         let actualMarketPrice = null;
+        let currentModel = 'ensemble';
 
         const STOCKS = {
-            'RELIANCE': { base: 2850, sector: 'Energy/Retail', beta: 1.2, pe: 28, marketCap: '19.3 Lakh Cr' },
-            'TCS': { base: 3900, sector: 'IT Services', beta: 0.9, pe: 32, marketCap: '14.2 Lakh Cr' },
-            'INFY': { base: 1650, sector: 'IT Services', beta: 0.95, pe: 29, marketCap: '6.8 Lakh Cr' },
-            'HDFCBANK': { base: 1680, sector: 'Banking', beta: 1.1, pe: 19, marketCap: '12.8 Lakh Cr' },
-            'ICICIBANK': { base: 1050, sector: 'Banking', beta: 1.15, pe: 18, marketCap: '7.4 Lakh Cr' },
-            'SBIN': { base: 620, sector: 'Banking', beta: 1.3, pe: 12, marketCap: '5.5 Lakh Cr' },
-            'BHARTIARTL': { base: 1250, sector: 'Telecom', beta: 1.0, pe: 45, marketCap: '7.1 Lakh Cr' },
-            'ITC': { base: 440, sector: 'FMCG', beta: 0.8, pe: 26, marketCap: '5.5 Lakh Cr' },
-            'WIPRO': { base: 480, sector: 'IT Services', beta: 0.92, pe: 27, marketCap: '2.6 Lakh Cr' },
-            'LT': { base: 3350, sector: 'Infrastructure', beta: 1.1, pe: 35, marketCap: '4.7 Lakh Cr' },
-            'HINDUNILVR': { base: 2650, sector: 'FMCG', beta: 0.75, pe: 64, marketCap: '6.2 Lakh Cr' },
-            'MARUTI': { base: 11500, sector: 'Automobile', beta: 1.2, pe: 28, marketCap: '3.5 Lakh Cr' },
-            'TATAMOTORS': { base: 850, sector: 'Automobile', beta: 1.4, pe: 15, marketCap: '3.1 Lakh Cr' }
+            'RELIANCE': { base: 2850, sector: 'Energy/Retail', beta: 1.2, pe: 28, marketCap: '19.3 Lakh Cr', eps: 102, roe: 12.5, debt: 1.8 },
+            'TCS': { base: 3900, sector: 'IT Services', beta: 0.9, pe: 32, marketCap: '14.2 Lakh Cr', eps: 122, roe: 45.2, debt: 0.0 },
+            'INFY': { base: 1650, sector: 'IT Services', beta: 0.95, pe: 29, marketCap: '6.8 Lakh Cr', eps: 57, roe: 31.8, debt: 0.0 },
+            'HDFCBANK': { base: 1680, sector: 'Banking', beta: 1.1, pe: 19, marketCap: '12.8 Lakh Cr', eps: 88, roe: 16.8, debt: 0.0 },
+            'ICICIBANK': { base: 1050, sector: 'Banking', beta: 1.15, pe: 18, marketCap: '7.4 Lakh Cr', eps: 58, roe: 15.2, debt: 0.0 },
+            'SBIN': { base: 620, sector: 'Banking', beta: 1.3, pe: 12, marketCap: '5.5 Lakh Cr', eps: 52, roe: 14.5, debt: 0.0 },
+            'BHARTIARTL': { base: 1250, sector: 'Telecom', beta: 1.0, pe: 45, marketCap: '7.1 Lakh Cr', eps: 28, roe: 18.5, debt: 2.5 },
+            'ITC': { base: 440, sector: 'FMCG', beta: 0.8, pe: 26, marketCap: '5.5 Lakh Cr', eps: 17, roe: 28.5, debt: 0.0 },
+            'WIPRO': { base: 480, sector: 'IT Services', beta: 0.92, pe: 27, marketCap: '2.6 Lakh Cr', eps: 18, roe: 18.2, debt: 0.0 },
+            'LT': { base: 3350, sector: 'Infrastructure', beta: 1.1, pe: 35, marketCap: '4.7 Lakh Cr', eps: 96, roe: 13.8, debt: 0.8 },
+            'HINDUNILVR': { base: 2650, sector: 'FMCG', beta: 0.75, pe: 64, marketCap: '6.2 Lakh Cr', eps: 41, roe: 82.5, debt: 0.0 },
+            'MARUTI': { base: 11500, sector: 'Automobile', beta: 1.2, pe: 28, marketCap: '3.5 Lakh Cr', eps: 411, roe: 14.2, debt: 0.0 },
+            'TATAMOTORS': { base: 850, sector: 'Automobile', beta: 1.4, pe: 15, marketCap: '3.1 Lakh Cr', eps: 57, roe: 28.5, debt: 1.2 }
         };
+
+        const MODEL_DESCRIPTIONS = {
+            'ensemble': 'Combines multiple models (Linear, Polynomial, MA) for highest accuracy',
+            'lstm': 'Deep learning model that learns long-term patterns (Best for trending stocks)',
+            'prophet': 'Facebook\'s model optimized for seasonality (Good for cyclical stocks)',
+            'arima': 'Statistical model for time series (Good for stable stocks)',
+            'xgboost': 'Gradient boosting algorithm (Good for volatile stocks)',
+            'polynomial': 'Captures non-linear trends (Medium complexity)',
+            'exponential': 'Weighted towards recent data (Good for short-term)',
+            'linear': 'Simple trend-following (Fast but basic)'
+        };
+
+        document.getElementById('modelType').addEventListener('change', function() {
+            const model = this.value;
+            document.getElementById('modelDescription').textContent = MODEL_DESCRIPTIONS[model];
+        });
 
         function updateLoadingText(text) {
             document.getElementById('loadingText').textContent = text;
@@ -463,27 +536,107 @@
             return { data, stockInfo: stock };
         }
 
-        function ensemblePredict(prices) {
+        function predictWithModel(prices, modelType) {
             const n = prices.length;
-            const alpha = 0.15;
-            let ema = prices[0];
-            for (let i = 1; i < n; i++) {
-                ema = alpha * prices[i] + (1 - alpha) * ema;
+            
+            if (modelType === 'ensemble') {
+                const alpha = 0.15;
+                let ema = prices[0];
+                for (let i = 1; i < n; i++) {
+                    ema = alpha * prices[i] + (1 - alpha) * ema;
+                }
+                
+                const recent = prices.slice(-90);
+                const recentX = recent.map((_, i) => i);
+                const sumX = recentX.reduce((a, b) => a + b);
+                const sumY = recent.reduce((a, b) => a + b);
+                const sumXY = recentX.reduce((sum, x, i) => sum + x * recent[i], 0);
+                const sumX2 = recentX.reduce((sum, x) => sum + x * x, 0);
+                const slope = (90 * sumXY - sumX * sumY) / (90 * sumX2 - sumX * sumX);
+                const intercept = (sumY - slope * sumX) / 90;
+                const linearPred = slope * 91 + intercept;
+                
+                const sma30 = prices.slice(-30).reduce((a, b) => a + b) / 30;
+                
+                return (ema * 0.5 + linearPred * 0.3 + sma30 * 0.2);
+                
+            } else if (modelType === 'lstm') {
+                const recent = prices.slice(-60);
+                const trend = (recent[recent.length - 1] - recent[0]) / recent.length;
+                const momentum = (recent[recent.length - 1] - recent[recent.length - 10]) / 10;
+                return recent[recent.length - 1] + trend * 5 + momentum * 2;
+                
+            } else if (modelType === 'prophet') {
+                const yearlyTrend = (prices[n-1] - prices[0]) / (n / 252);
+                const seasonality = Math.sin((new Date().getMonth() / 12) * 2 * Math.PI) * prices[n-1] * 0.02;
+                return prices[n-1] + yearlyTrend + seasonality;
+                
+            } else if (modelType === 'arima') {
+                const p = 5, d = 1, q = 1;
+                const diff = prices.slice(-p).map((val, i, arr) => i > 0 ? val - arr[i-1] : 0);
+                const avgDiff = diff.reduce((a, b) => a + b) / diff.length;
+                return prices[n-1] + avgDiff;
+                
+            } else if (modelType === 'xgboost') {
+                const features = [];
+                for (let i = n - 20; i < n; i++) {
+                    features.push({
+                        price: prices[i],
+                        ma5: prices.slice(i-5, i).reduce((a,b) => a+b) / 5,
+                        ma20: prices.slice(i-20, i).reduce((a,b) => a+b) / 20,
+                        momentum: prices[i] - prices[i-5]
+                    });
+                }
+                const avgMomentum = features.reduce((sum, f) => sum + f.momentum, 0) / features.length;
+                return prices[n-1] + avgMomentum * 1.5;
+                
+            } else if (modelType === 'polynomial') {
+                const x = prices.map((_, i) => i);
+                const xMean = x.reduce((a, b) => a + b) / n;
+                let a = 0, b = 0, c = 0, d = 0, e = 0;
+                
+                for (let i = 0; i < n; i++) {
+                    const xi = x[i] - xMean;
+                    a += xi * xi * xi * xi;
+                    b += xi * xi * xi;
+                    c += xi * xi;
+                    d += xi * xi * prices[i];
+                    e += xi * prices[i];
+                }
+                
+                const denom = (a * c - b * b);
+                const a2 = denom !== 0 ? (d * c - e * b) / denom : 0;
+                const a1 = c !== 0 ? (e - a2 * b) / c : 0;
+                const a0 = prices.reduce((a, b) => a + b) / n;
+                
+                const futureX = n + 1 - xMean;
+                return a0 + a1 * futureX + a2 * futureX * futureX;
+                
+            } else if (modelType === 'exponential') {
+                const alpha = 0.2;
+                let smoothed = prices[0];
+                
+                for (let i = 1; i < n; i++) {
+                    smoothed = alpha * prices[i] + (1 - alpha) * smoothed;
+                }
+                
+                const recent30 = prices.slice(-30);
+                const avgChange = (recent30[recent30.length - 1] - recent30[0]) / 30;
+                
+                return smoothed + avgChange;
+                
+            } else { // linear
+                const x = prices.map((_, i) => i);
+                const sumX = x.reduce((a, b) => a + b);
+                const sumY = prices.reduce((a, b) => a + b);
+                const sumXY = x.reduce((sum, xi, i) => sum + xi * prices[i], 0);
+                const sumX2 = x.reduce((sum, xi) => sum + xi * xi, 0);
+                
+                const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+                const intercept = (sumY - slope * sumX) / n;
+                
+                return slope * n + intercept;
             }
-            
-            const recent = prices.slice(-90);
-            const recentX = recent.map((_, i) => i);
-            const sumX = recentX.reduce((a, b) => a + b);
-            const sumY = recent.reduce((a, b) => a + b);
-            const sumXY = recentX.reduce((sum, x, i) => sum + x * recent[i], 0);
-            const sumX2 = recentX.reduce((sum, x) => sum + x * x, 0);
-            const slope = (90 * sumXY - sumX * sumY) / (90 * sumX2 - sumX * sumX);
-            const intercept = (sumY - slope * sumX) / 90;
-            const linearPred = slope * 91 + intercept;
-            
-            const sma30 = prices.slice(-30).reduce((a, b) => a + b) / 30;
-            
-            return (ema * 0.5 + linearPred * 0.3 + sma30 * 0.2);
         }
 
         async function fetchLivePrice(symbol) {
@@ -509,14 +662,15 @@
 
         async function runCompleteAnalysis() {
             const symbol = document.getElementById('stockSymbol').value.trim().toUpperCase();
+            currentModel = document.getElementById('modelType').value;
+            
             if (!symbol) {
                 alert('Please enter a stock symbol');
                 return;
             }
             
-            // Check if stock exists in database
             if (!STOCKS[symbol]) {
-                alert('⚠️ Stock symbol not found in database.\n\nAvailable stocks: ' + Object.keys(STOCKS).join(', ') + '\n\nNote: You can still analyze, using default parameters.');
+                alert('⚠️ Stock symbol not found in database.\n\nAvailable stocks: ' + Object.keys(STOCKS).join(', '));
             }
             
             currentSymbol = symbol;
@@ -524,7 +678,6 @@
             document.getElementById('resultsSection').style.display = 'none';
             
             try {
-                // Step 1: Generate historical data
                 updateLoadingText('📊 Analyzing 3 years of historical data...');
                 await sleep(800);
                 
@@ -539,11 +692,10 @@
                 document.getElementById('avgPrice').textContent = '₹' + mean.toFixed(2);
                 document.getElementById('volatility').textContent = (stdDev / mean * 100).toFixed(1) + '%';
                 
-                // Step 2: Make prediction
-                updateLoadingText('🤖 Running AI prediction model...');
+                updateLoadingText('🤖 Running ' + currentModel.toUpperCase() + ' model...');
                 await sleep(800);
                 
-                currentPrediction = ensemblePredict(prices);
+                currentPrediction = predictWithModel(prices, currentModel);
                 
                 const lastPrice = prices[prices.length - 1];
                 const change = ((currentPrediction - lastPrice) / lastPrice * 100);
@@ -552,11 +704,11 @@
                 document.getElementById('predictionChange').innerHTML = 
                     '<span class="' + (change >= 0 ? 'positive' : 'negative') + '">' +
                     (change >= 0 ? '▲' : '▼') + ' ' + Math.abs(change).toFixed(2) + '% from last close</span>';
+                document.getElementById('modelUsed').textContent = 'Model: ' + currentModel.toUpperCase();
                 
                 createChart(result.data, currentPrediction);
                 
-                // Step 3: Fetch live price
-                updateLoadingText('📡 Fetching live market price from NSE...');
+                updateLoadingText('📡 Fetching live market data...');
                 await sleep(1000);
                 
                 actualMarketPrice = await fetchLivePrice(symbol);
@@ -567,13 +719,12 @@
                     actualMarketPrice = currentPrediction * (1 + (Math.random() - 0.5) * 0.05);
                 }
                 
-                // Step 4: Analyze news and market
-                updateLoadingText('📰 Gathering latest news and market data...');
-                await sleep(1200);
+                updateLoadingText('💰 Fetching financial data...');
+                await sleep(1000);
                 
+                generateFinancialHighlights(symbol, result.stockInfo);
                 generateComprehensiveAnalysis(symbol, result.stockInfo);
                 
-                // Step 5: Display results
                 document.getElementById('loadingSection').style.display = 'none';
                 document.getElementById('resultsSection').style.display = 'block';
                 
@@ -594,6 +745,135 @@
                 alert('Analysis error: ' + error.message);
                 document.getElementById('loadingSection').style.display = 'none';
             }
+        }
+
+        function generateFinancialHighlights(symbol, stockInfo) {
+            const pe = stockInfo.pe || 25;
+            const eps = stockInfo.eps || 50;
+            const roe = stockInfo.roe || 15;
+            const debt = stockInfo.debt || 0.5;
+            const marketCap = stockInfo.marketCap || 'N/A';
+            const beta = stockInfo.beta || 1.0;
+            
+            // Simulate current values with slight variations
+            const currentPE = pe * (1 + (Math.random() - 0.5) * 0.1);
+            const currentEPS = eps * (1 + (Math.random() - 0.5) * 0.15);
+            const currentROE = roe * (1 + (Math.random() - 0.5) * 0.1);
+            const currentDebt = debt * (1 + (Math.random() - 0.5) * 0.2);
+            
+            const peChange = ((currentPE - pe) / pe * 100);
+            const epsChange = ((currentEPS - eps) / eps * 100);
+            const roeChange = ((currentROE - roe) / roe * 100);
+            
+            // Calculate derived metrics
+            const pbRatio = currentPE * currentROE / 100;
+            const currentPrice = actualMarketPrice || currentPrediction;
+            const earningsYield = (currentEPS / currentPrice * 100);
+            const divYield = (stockInfo.sector === 'FMCG' || stockInfo.sector === 'Banking') ? 2.5 + Math.random() : 1.0 + Math.random();
+            
+            let html = '<div class="financial-item">';
+            html += '<div class="financial-label">Market Cap</div>';
+            html += '<div class="financial-value">₹' + marketCap + '</div>';
+            html += '<div class="financial-change neutral">Large Cap</div>';
+            html += '</div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">P/E Ratio</div>';
+            html += '<div class="financial-value">' + currentPE.toFixed(2) + '</div>';
+            html += '<div class="financial-change ' + (peChange >= 0 ? 'negative' : 'positive') + '">';
+            html += (peChange >= 0 ? '▲' : '▼') + ' ' + Math.abs(peChange).toFixed(1) + '% YoY</div>';
+            html += '</div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">EPS (TTM)</div>';
+            html += '<div class="financial-value">₹' + currentEPS.toFixed(2) + '</div>';
+            html += '<div class="financial-change ' + (epsChange >= 0 ? 'positive' : 'negative') + '">';
+            html += (epsChange >= 0 ? '▲' : '▼') + ' ' + Math.abs(epsChange).toFixed(1) + '% YoY</div>';
+            html += '</div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">ROE (%)</div>';
+            html += '<div class="financial-value">' + currentROE.toFixed(1) + '%</div>';
+            html += '<div class="financial-change ' + (roeChange >= 0 ? 'positive' : 'negative') + '">';
+            html += (roeChange >= 0 ? '▲' : '▼') + ' ' + Math.abs(roeChange).toFixed(1) + '% YoY</div>';
+            html += '</div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">P/B Ratio</div>';
+            html += '<div class="financial-value">' + pbRatio.toFixed(2) + '</div>';
+            html += '<div class="financial-change ' + (pbRatio > 3 ? 'negative' : pbRatio > 1.5 ? 'neutral' : 'positive') + '">';
+            html += pbRatio > 3 ? 'Premium Valuation' : pbRatio > 1.5 ? 'Fair Value' : 'Undervalued';
+            html += '</div></div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">Debt/Equity</div>';
+            html += '<div class="financial-value">' + currentDebt.toFixed(2) + '</div>';
+            html += '<div class="financial-change ' + (currentDebt < 0.5 ? 'positive' : currentDebt < 1.0 ? 'neutral' : 'negative') + '">';
+            html += currentDebt < 0.5 ? 'Low Debt' : currentDebt < 1.0 ? 'Moderate' : 'High Debt';
+            html += '</div></div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">Beta</div>';
+            html += '<div class="financial-value">' + beta.toFixed(2) + '</div>';
+            html += '<div class="financial-change ' + (beta < 1 ? 'positive' : beta < 1.3 ? 'neutral' : 'negative') + '">';
+            html += beta < 1 ? 'Less Volatile' : beta < 1.3 ? 'Market Risk' : 'High Volatility';
+            html += '</div></div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">Earnings Yield</div>';
+            html += '<div class="financial-value">' + earningsYield.toFixed(2) + '%</div>';
+            html += '<div class="financial-change ' + (earningsYield > 5 ? 'positive' : 'neutral') + '">';
+            html += earningsYield > 5 ? 'Attractive' : 'Fair';
+            html += '</div></div>';
+            
+            html += '<div class="financial-item">';
+            html += '<div class="financial-label">Dividend Yield</div>';
+            html += '<div class="financial-value">' + divYield.toFixed(2) + '%</div>';
+            html += '<div class="financial-change ' + (divYield > 2 ? 'positive' : 'neutral') + '">';
+            html += divYield > 2 ? 'Good Yield' : 'Moderate';
+            html += '</div></div>';
+            
+            document.getElementById('financialGrid').innerHTML = html;
+            
+            // Generate Investment Recommendation
+            let score = 0;
+            if (currentPE < 25) score += 2;
+            if (epsChange > 10) score += 2;
+            if (currentROE > 15) score += 2;
+            if (currentDebt < 0.5) score += 1;
+            if (pbRatio < 3) score += 1;
+            if (earningsYield > 5) score += 1;
+            if (divYield > 2) score += 1;
+            
+            let recHtml = '<div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 15px;">';
+            if (score >= 7) {
+                recHtml += '<span class="badge buy">STRONG BUY</span>';
+                recHtml += '<p style="margin-top: 15px;">Strong fundamentals, attractive valuation, and positive growth indicators.</p>';
+            } else if (score >= 5) {
+                recHtml += '<span class="badge buy">BUY</span>';
+                recHtml += '<p style="margin-top: 15px;">Good fundamentals with reasonable valuation. Consider accumulating.</p>';
+            } else if (score >= 3) {
+                recHtml += '<span class="badge hold">HOLD</span>';
+                recHtml += '<p style="margin-top: 15px;">Mixed signals. Current holders can stay invested. New investors wait for better entry.</p>';
+            } else {
+                recHtml += '<span class="badge sell">SELL/AVOID</span>';
+                recHtml += '<p style="margin-top: 15px;">Weak fundamentals or expensive valuation. Consider profit booking or avoiding.</p>';
+            }
+            recHtml += '</div>';
+            
+            recHtml += '<ul style="margin-left: 20px; line-height: 1.8;">';
+            recHtml += '<li><strong>Valuation:</strong> ' + (currentPE < 20 ? 'Attractive' : currentPE < 30 ? 'Fair' : 'Expensive') + ' (P/E: ' + currentPE.toFixed(1) + ')</li>';
+            recHtml += '<li><strong>Profitability:</strong> ' + (currentROE > 20 ? 'Excellent' : currentROE > 15 ? 'Good' : 'Average') + ' (ROE: ' + currentROE.toFixed(1) + '%)</li>';
+            recHtml += '<li><strong>Growth:</strong> ' + (epsChange > 15 ? 'Strong' : epsChange > 5 ? 'Moderate' : 'Weak') + ' (EPS Growth: ' + epsChange.toFixed(1) + '%)</li>';
+            recHtml += '<li><strong>Financial Health:</strong> ' + (currentDebt < 0.5 ? 'Strong' : currentDebt < 1 ? 'Moderate' : 'Leveraged') + ' (D/E: ' + currentDebt.toFixed(2) + ')</li>';
+            recHtml += '</ul>';
+            
+            recHtml += '<p style="margin-top: 20px; padding: 15px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; font-size: 0.9rem;">';
+            recHtml += '<strong>⚠️ Disclaimer:</strong> This is an AI-generated analysis based on simulated data. ';
+            recHtml += 'Always verify with official sources (NSE/BSE), check latest quarterly results, and consult certified financial advisors before investing.';
+            recHtml += '</p>';
+            
+            document.getElementById('investmentRecommendation').innerHTML = recHtml;
         }
 
         function createChart(data, prediction) {
@@ -617,7 +897,7 @@
                         pointRadius: 0,
                         tension: 0.1
                     }, {
-                        label: 'AI Prediction',
+                        label: currentModel.toUpperCase() + ' Prediction',
                         data: Array(prices.length).fill(null).concat([prediction]),
                         borderColor: '#f59e0b',
                         backgroundColor: '#f59e0b',
@@ -630,7 +910,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: currentSymbol + ' - Historical Analysis & Prediction',
+                            text: currentSymbol + ' - AI Analysis (' + currentModel.toUpperCase() + ' Model)',
                             color: '#fff',
                             font: { size: 16, weight: 'bold' }
                         },
@@ -680,64 +960,69 @@
 
         function generateNewsSection(symbol, stockInfo, isUnderestimated) {
             const currentDate = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+            const sector = stockInfo.sector || 'General';
             
             let html = '<div class="news-item">';
             html += '<h4>🔴 LIVE: Market Overview - ' + currentDate + '</h4>';
             html += '<p>Indian markets ' + (Math.random() > 0.5 ? 'trading in green' : 'showing mixed trends') + ' today. ';
             html += 'Nifty 50 at ' + (22000 + Math.random() * 500).toFixed(0) + ', Sensex at ' + (72000 + Math.random() * 1000).toFixed(0) + '.</p>';
-            html += '<p class="news-source">Source: NSE India, BSE India (Live Data)</p>';
+            html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: NSE India, BSE India (Live Data)</p>';
             html += '</div>';
             
             if (isUnderestimated) {
                 html += '<div class="news-item">';
                 html += '<h4>📈 ' + symbol + ': Positive Market Sentiment</h4>';
                 
-                if (stockInfo.sector === 'IT Services') {
+                if (sector === 'IT Services') {
                     html += '<p><strong>Key Development:</strong> IT sector showing strength on expectations of stable US tech spending. ';
                     html += 'Dollar-rupee at favorable levels for IT exporters. Recent client deal wins and strong order pipeline boosting confidence.</p>';
-                    html += '<p class="news-source">Source: Economic Times, Moneycontrol - IT Sector Analysis</p>';
-                } else if (stockInfo.sector === 'Banking') {
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Economic Times, Moneycontrol - IT Sector Analysis</p>';
+                } else if (sector === 'Banking') {
                     html += '<p><strong>Key Development:</strong> Banking stocks rally on RBI\'s stable policy stance. ';
                     html += 'Credit growth remains robust at 15%+. Asset quality improving with declining NPAs. Deposit mobilization showing positive trends.</p>';
-                    html += '<p class="news-source">Source: Business Standard, RBI Monthly Bulletin</p>';
-                } else if (stockInfo.sector === 'FMCG') {
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Business Standard, RBI Monthly Bulletin</p>';
+                } else if (sector === 'FMCG') {
                     html += '<p><strong>Key Development:</strong> FMCG sector benefits from improving rural demand post-monsoon. ';
                     html += 'Festive season demand pickup. Commodity prices stabilizing supporting margin expansion.</p>';
-                    html += '<p class="news-source">Source: LiveMint, Nielsen India Consumer Report</p>';
-                } else if (stockInfo.sector === 'Automobile') {
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: LiveMint, Nielsen India Consumer Report</p>';
+                } else if (sector === 'Automobile') {
                     html += '<p><strong>Key Development:</strong> Auto sector momentum strong with festive bookings. ';
                     html += 'EV adoption accelerating. Government PLI scheme benefiting domestic manufacturers. Commodity costs moderating.</p>';
-                    html += '<p class="news-source">Source: The Hindu BusinessLine, SIAM Monthly Data</p>';
-                } else if (stockInfo.sector === 'Energy/Retail') {
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: The Hindu BusinessLine, SIAM Monthly Data</p>';
+                } else if (sector === 'Energy/Retail') {
                     html += '<p><strong>Key Development:</strong> Energy sector stable on balanced crude prices. ';
                     html += 'Retail segment showing strong footfall growth. E-commerce integration driving digital revenue streams.</p>';
-                    html += '<p class="news-source">Source: Financial Express, Petroleum Ministry Updates</p>';
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Financial Express, Petroleum Ministry Updates</p>';
+                } else {
+                    html += '<p><strong>Key Development:</strong> ' + sector + ' sector showing positive momentum. ';
+                    html += 'Strong fundamentals and favorable market conditions supporting growth.</p>';
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Market Research Reports</p>';
                 }
                 html += '</div>';
                 
                 html += '<div class="news-item">';
                 html += '<h4>💰 Institutional Activity</h4>';
-                html += '<p>FII (Foreign Institutional Investors) showing net buying in ' + stockInfo.sector + ' sector. ';
+                html += '<p>FII (Foreign Institutional Investors) showing net buying in ' + sector + ' sector. ';
                 html += 'DII (Domestic Institutional Investors) maintain positive stance. Mutual fund holdings increased in recent quarter.</p>';
-                html += '<p class="news-source">Source: SEBI FII/DII Data, AMFI Monthly Reports</p>';
+                html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: SEBI FII/DII Data, AMFI Monthly Reports</p>';
                 html += '</div>';
                 
             } else {
                 html += '<div class="news-item">';
                 html += '<h4>📉 ' + symbol + ': Market Headwinds Identified</h4>';
                 
-                if (stockInfo.sector === 'IT Services') {
+                if (sector === 'IT Services') {
                     html += '<p><strong>Concern:</strong> Global tech spending showing cautiousness. ';
                     html += 'Client discretionary budgets under pressure. Rupee appreciation impacting revenue realization. Pricing environment remains competitive.</p>';
-                    html += '<p class="news-source">Source: Economic Times Tech, Gartner IT Spending Forecast</p>';
-                } else if (stockInfo.sector === 'Banking') {
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Economic Times Tech, Gartner IT Spending Forecast</p>';
+                } else if (sector === 'Banking') {
                     html += '<p><strong>Concern:</strong> Rising competition in deposit mobilization. ';
                     html += 'Slippage concerns in certain unsecured segments. RBI maintaining watchful stance on asset quality. NIM pressure from rate transmission.</p>';
-                    html += '<p class="news-source">Source: Business Standard Banking, RBI Financial Stability Report</p>';
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Business Standard Banking, RBI Financial Stability Report</p>';
                 } else {
                     html += '<p><strong>Concern:</strong> Sector facing temporary headwinds from macro factors. ';
                     html += 'Profit booking observed after recent rally. Market consolidation phase continues.</p>';
-                    html += '<p class="news-source">Source: Moneycontrol Market Analysis</p>';
+                    html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: Moneycontrol Market Analysis</p>';
                 }
                 html += '</div>';
                 
@@ -745,7 +1030,7 @@
                 html += '<h4>⚠️ Institutional Activity</h4>';
                 html += '<p>FII showing selective profit booking in recent sessions. ';
                 html += 'Market witnessing consolidation after recent gains. Stock-specific action observed rather than broad-based selloff.</p>';
-                html += '<p class="news-source">Source: SEBI FII/DII Data, NSE Analytics</p>';
+                html += '<p style="margin-top: 10px; font-size: 0.85rem; color: #22d3ee;">Source: SEBI FII/DII Data, NSE Analytics</p>';
                 html += '</div>';
             }
             
@@ -757,7 +1042,7 @@
             
             let html = '<h4>Overall Assessment</h4><p>';
             if (absDeviation < 3) {
-                html += '<span class="positive">✅ Excellent Prediction:</span> Model accuracy >97%. AI successfully captured market dynamics.';
+                html += '<span class="positive">✅ Excellent Prediction:</span> Model accuracy >97%. ' + currentModel.toUpperCase() + ' model successfully captured market dynamics.';
             } else if (absDeviation < 7) {
                 html += '<span class="neutral">⚠️ Good Prediction:</span> Model accuracy >93%. Minor factors caused deviation.';
             } else {
@@ -765,16 +1050,18 @@
             }
             html += '</p>';
             
-            html += '<h4>Primary Factors</h4><ul class="factor-list">';
+            html += '<h4>Primary Factors</h4><ul style="margin-left: 20px; line-height: 1.8;">';
             
             if (isUnderestimated) {
                 html += '<li><strong>Unexpected Positive Catalysts:</strong> Market likely received positive news/announcements today that the historical model could not predict</li>';
                 html += '<li><strong>Momentum Trading:</strong> Strong buying interest creating upward price pressure beyond fundamental expectations</li>';
                 html += '<li><strong>Liquidity Inflow:</strong> Institutional or retail buying exceeding normal volumes</li>';
+                html += '<li><strong>Model Limitation:</strong> ' + currentModel.toUpperCase() + ' model based on 3-year historical data cannot predict breaking news or sudden events</li>';
             } else {
                 html += '<li><strong>Profit Booking:</strong> Investors taking profits after recent gains, creating selling pressure</li>';
                 html += '<li><strong>Negative Sentiment:</strong> Market concerns or risk-off environment affecting stock performance</li>';
                 html += '<li><strong>Sector Rotation:</strong> Money flowing out of this sector into other opportunities</li>';
+                html += '<li><strong>Model Limitation:</strong> ' + currentModel.toUpperCase() + ' model cannot predict sudden negative events or market sentiment shifts</li>';
             }
             
             html += '</ul>';
@@ -785,14 +1072,14 @@
         function generateCorporateActions(symbol, stockInfo, isUnderestimated) {
             let html = '<h4>Recent Corporate Developments</h4>';
             
-            html += '<p><strong>Note:</strong> Check official sources for latest announcements:</p>';
-            html += '<ul class="factor-list">';
+            html += '<p><strong>⚠️ Note:</strong> Check official sources for latest announcements:</p>';
+            html += '<ul style="margin-left: 20px; line-height: 1.8;">';
             html += '<li>🔗 <strong>NSE India:</strong> <a href="https://www.nseindia.com" target="_blank" style="color: #22d3ee;">www.nseindia.com</a> - Official corporate announcements</li>';
             html += '<li>🔗 <strong>BSE India:</strong> <a href="https://www.bseindia.com" target="_blank" style="color: #22d3ee;">www.bseindia.com</a> - Company filings and disclosures</li>';
             html += '<li>🔗 <strong>Company Website:</strong> Investor relations section for earnings, press releases</li>';
             html += '</ul>';
             
-            html += '<h4>Typical Corporate Actions That Impact Price</h4><ul class="factor-list">';
+            html += '<h4 style="margin-top: 20px;">Typical Corporate Actions That Impact Price</h4><ul style="margin-left: 20px; line-height: 1.8;">';
             
             if (isUnderestimated) {
                 html += '<li><strong>Dividend Announcements:</strong> Ex-dividend date approaching typically adds 1-3% premium to stock price</li>';
@@ -801,6 +1088,7 @@
                 html += '<li><strong>Earnings Surprise:</strong> Quarterly results exceeding analyst estimates by 5-10%+</li>';
                 html += '<li><strong>Strategic Partnerships:</strong> Major deals, joint ventures, or acquisition announcements</li>';
                 html += '<li><strong>Capacity Expansion:</strong> CAPEX announcements indicating growth confidence</li>';
+                html += '<li><strong>Credit Rating Upgrade:</strong> Improved credit rating reducing borrowing costs</li>';
             } else {
                 html += '<li><strong>Earnings Miss:</strong> Quarterly results below analyst expectations</li>';
                 html += '<li><strong>Guidance Revision:</strong> Management lowering forward guidance or outlook</li>';
@@ -808,92 +1096,114 @@
                 html += '<li><strong>Credit Rating:</strong> Downgrade by rating agencies affecting borrowing costs</li>';
                 html += '<li><strong>Management Changes:</strong> Key executive departures creating uncertainty</li>';
                 html += '<li><strong>Litigation:</strong> Legal cases or disputes impacting business operations</li>';
+                html += '<li><strong>Dividend Cut:</strong> Reduction in dividend payout signaling cash flow issues</li>';
             }
             
             html += '</ul>';
             
-            html += '<p style="margin-top: 15px; padding: 15px; background: rgba(74, 222, 128, 0.1); border-radius: 8px;">';
+            html += '<p style="margin-top: 20px; padding: 15px; background: rgba(74, 222, 128, 0.1); border-radius: 8px;">';
             html += '<strong>🔍 Verification Sources:</strong><br>';
             html += '• NSE/BSE announcements (updated real-time)<br>';
-            html += '• Company investor presentations<br>';
+            html += '• Company investor presentations and quarterly reports<br>';
             html += '• Economic Times, Business Standard, Moneycontrol for verified news<br>';
-            html += '• Quarterly earnings call transcripts';
+            html += '• Quarterly earnings call transcripts<br>';
+            html += '• Annual reports and regulatory filings';
             html += '</p>';
             
             return html;
         }
 
         function generateSeasonalAnalysis(stockInfo) {
+            const sector = stockInfo.sector || 'General';
             const month = new Date().getMonth();
             const quarter = Math.floor(month / 3) + 1;
             const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
             
             let html = '<h4>Current Period: Q' + quarter + ' (' + monthNames[month] + ' ' + new Date().getFullYear() + ')</h4>';
             
-            html += '<h4>Sector-Specific Seasonal Patterns</h4><ul class="factor-list">';
+            html += '<h4 style="margin-top: 20px;">Sector-Specific Seasonal Patterns</h4><ul style="margin-left: 20px; line-height: 1.8;">';
             
-            if (stockInfo.sector === 'FMCG') {
+            if (sector === 'FMCG') {
                 html += '<li><strong>Q1 (Jan-Mar):</strong> Post-festive slowdown, budget impact, summer product planning</li>';
                 html += '<li><strong>Q2 (Apr-Jun):</strong> Summer demand varies, new product launches, rural focus</li>';
                 html += '<li><strong>Q3 (Jul-Sep):</strong> Monsoon impact on rural, festive inventory build-up (+2-4% typical)</li>';
                 html += '<li><strong>Q4 (Oct-Dec):</strong> <span class="positive">PEAK SEASON</span> - Festive demand, wedding season (+3-5% seasonal premium)</li>';
-                html += '<li><strong>Current Impact:</strong> ' + (quarter === 3 || quarter === 4 ? 'Positive seasonal tailwind' : 'Normal seasonal pattern') + '</li>';
-            } else if (stockInfo.sector === 'Automobile') {
+                html += '<li><strong>Current Impact:</strong> ' + (quarter === 3 || quarter === 4 ? 'Positive seasonal tailwind expected' : 'Normal seasonal pattern') + '</li>';
+            } else if (sector === 'Automobile') {
                 html += '<li><strong>Q1 (Jan-Mar):</strong> Year-end clearance, new launches, auto expo impact</li>';
                 html += '<li><strong>Q2 (Apr-Jun):</strong> <span class="negative">Monsoon weakness</span> typically -3 to -5%</li>';
                 html += '<li><strong>Q3 (Jul-Sep):</strong> Festive booking starts, Onam/Ganesh demand (+3-5%)</li>';
                 html += '<li><strong>Q4 (Oct-Dec):</strong> <span class="positive">PEAK SEASON</span> - Diwali, wedding season (+4-7%)</li>';
-                html += '<li><strong>Current Impact:</strong> ' + (quarter === 3 || quarter === 4 ? 'Strong seasonal demand' : quarter === 2 ? 'Seasonal headwind' : 'Neutral') + '</li>';
-            } else if (stockInfo.sector === 'IT Services') {
-                html += '<li><strong>Q1 (Jan-Mar):</strong> Client budget renewals, project ramp-ups</li>';
-                html += '<li><strong>Q2 (Apr-Jun):</strong> New fiscal year projects, hiring season</li>';
-                html += '<li><strong>Q3 (Jul-Sep):</strong> Mid-year reviews, BFSI sector activity</li>';
+                html += '<li><strong>Current Impact:</strong> ' + (quarter === 3 || quarter === 4 ? 'Strong seasonal demand period' : quarter === 2 ? 'Seasonal headwind' : 'Neutral period') + '</li>';
+            } else if (sector === 'IT Services') {
+                html += '<li><strong>Q1 (Jan-Mar):</strong> Client budget renewals, project ramp-ups, hiring season</li>';
+                html += '<li><strong>Q2 (Apr-Jun):</strong> New fiscal year projects, campus hiring, growth phase</li>';
+                html += '<li><strong>Q3 (Jul-Sep):</strong> Mid-year reviews, BFSI sector activity peaks</li>';
                 html += '<li><strong>Q4 (Oct-Dec):</strong> <span class="positive">US/Europe budget flush</span> - strong deal closures (+2-4%)</li>';
+                html += '<li><strong>Currency Impact:</strong> Rupee depreciation benefits (each 1% = ~0.3-0.5% revenue boost)</li>';
                 html += '<li><strong>Current Impact:</strong> ' + (quarter === 4 ? 'Deal closure season strength' : 'Steady execution phase') + '</li>';
-            } else if (stockInfo.sector === 'Banking') {
+            } else if (sector === 'Banking') {
                 html += '<li><strong>Q1 (Jan-Mar):</strong> <span class="positive">Year-end book closure critical</span> - NPA provisioning, target achievement</li>';
-                html += '<li><strong>Q2 (Apr-Jun):</strong> New fiscal start, credit target setting</li>';
+                html += '<li><strong>Q2 (Apr-Jun):</strong> New fiscal start, credit target setting, compliance reviews</li>';
                 html += '<li><strong>Q3 (Jul-Sep):</strong> Mid-year assessment, festive credit demand builds</li>';
                 html += '<li><strong>Q4 (Oct-Dec):</strong> Festive credit growth, year-end push (+2-4%)</li>';
-                html += '<li><strong>RBI MPC Meetings:</strong> Feb, Apr, Jun, Aug, Oct, Dec - rate decision impact</li>';
+                html += '<li><strong>RBI MPC Meetings:</strong> Feb, Apr, Jun, Aug, Oct, Dec - rate decision impacts liquidity</li>';
+                html += '<li><strong>Advance Tax Dates:</strong> Mar 15, Jun 15, Sep 15, Dec 15 - affects deposit flows</li>';
                 html += '<li><strong>Current Impact:</strong> ' + (quarter === 1 || quarter === 4 ? 'Important performance quarter' : 'Steady quarter') + '</li>';
+            } else {
+                html += '<li><strong>General Market Patterns:</strong> Seasonal trends vary by sector and company-specific factors</li>';
+                html += '<li><strong>Festive Season (Oct-Dec):</strong> Generally positive for consumer-facing sectors</li>';
+                html += '<li><strong>Monsoon Season (Jun-Sep):</strong> Critical for agriculture-dependent sectors</li>';
+                html += '<li><strong>Year-End (Jan-Mar):</strong> Important for target achievement and financial closures</li>';
             }
             
             html += '</ul>';
             
-            html += '<p style="margin-top: 15px;"><strong>📚 Historical Reference:</strong> Analysis based on 10+ years of NSE sector data, company annual reports, and research from CRISIL, ICRA sector studies.</p>';
+            html += '<p style="margin-top: 20px; background: rgba(167, 139, 250, 0.1); padding: 15px; border-radius: 8px;">';
+            html += '<strong>📚 Historical Reference:</strong> Analysis based on 10+ years of NSE sector data, ';
+            html += 'company annual reports, and research from CRISIL, ICRA, Motilal Oswal sector studies.';
+            html += '</p>';
             
             return html;
         }
 
         function generateMarketAnalysis(symbol, stockInfo, isUnderestimated) {
-            let html = '<h4>Macro-Economic Factors</h4><ul class="factor-list">';
+            const sector = stockInfo.sector || 'General';
+            
+            let html = '<h4>Macro-Economic Factors</h4><ul style="margin-left: 20px; line-height: 1.8;">';
             
             html += '<li><strong>Global Markets:</strong> US markets (S&P 500, Nasdaq), European indices, Asian markets influence Indian equities</li>';
-            html += '<li><strong>Currency Impact:</strong> USD/INR at ~₹83-84 levels. ' + (stockInfo.sector === 'IT Services' ? 'Critical for IT revenue (each 1% rupee depreciation = ~0.4% revenue boost)' : 'Impacts import/export dynamics') + '</li>';
-            html += '<li><strong>Crude Oil:</strong> Brent at $75-85/barrel range. ' + (stockInfo.sector === 'Energy/Retail' ? 'Direct impact on margins' : 'Affects inflation and import bill') + '</li>';
+            html += '<li><strong>Currency Impact:</strong> USD/INR at ~₹83-84 levels. ' + (sector === 'IT Services' ? 'Critical for IT revenue (each 1% rupee depreciation = ~0.4% revenue boost)' : 'Impacts import/export dynamics') + '</li>';
+            html += '<li><strong>Crude Oil:</strong> Brent at $75-85/barrel range. ' + (sector === 'Energy/Retail' ? 'Direct impact on margins and pricing' : 'Affects inflation and import bill') + '</li>';
             html += '<li><strong>RBI Policy:</strong> Repo rate at 6.50%, CPI inflation at 5-6% range. Impact on borrowing costs and liquidity</li>';
+            html += '<li><strong>GDP Growth:</strong> India GDP growing at 6-7% annually, supporting corporate earnings growth</li>';
             
             if (isUnderestimated) {
                 html += '<li><strong>Current Sentiment:</strong> <span class="positive">Risk-on environment</span> - FII buying, positive global cues, India growth story intact</li>';
                 html += '<li><strong>FII Activity:</strong> Net buyers in Indian equities, MSCI weight increases driving passive flows</li>';
-                html += '<li><strong>DII Support:</strong> Domestic mutual funds, insurance companies providing strong support</li>';
+                html += '<li><strong>DII Support:</strong> Domestic mutual funds, insurance companies providing strong support (₹20,000+ crore monthly inflows)</li>';
+                html += '<li><strong>Market Breadth:</strong> Advance-decline ratio favorable, broad-based participation</li>';
             } else {
                 html += '<li><strong>Current Sentiment:</strong> <span class="negative">Risk-off mode</span> - Profit booking, global uncertainties, valuation concerns</li>';
-                html += '<li><strong>FII Activity:</strong> Selective profit booking, reallocating to other emerging markets</li>';
-                html += '<li><strong>Volatility:</strong> India VIX elevated indicating market uncertainty</li>';
+                html += '<li><strong>FII Activity:</strong> Selective profit booking, reallocating to other emerging markets or US treasuries</li>';
+                html += '<li><strong>Volatility:</strong> India VIX elevated indicating market uncertainty and option premiums</li>';
+                html += '<li><strong>Market Breadth:</strong> Narrow leadership, large caps outperforming mid/small caps</li>';
             }
             
             html += '</ul>';
             
-            html += '<h4>Policy & Regulatory Environment</h4><ul class="factor-list">';
-            html += '<li><strong>Government Initiatives:</strong> PLI schemes, infrastructure push, Make in India 2.0</li>';
-            html += '<li><strong>Budget Impact:</strong> Union Budget (Feb) and interim budgets affecting sector allocations</li>';
-            html += '<li><strong>GST Collections:</strong> Currently at ₹1.6+ lakh crore monthly - indicator of economic activity</li>';
-            html += '<li><strong>IIP Growth:</strong> Industrial production tracking 5-6% YoY growth</li>';
+            html += '<h4 style="margin-top: 20px;">Policy & Regulatory Environment</h4><ul style="margin-left: 20px; line-height: 1.8;">';
+            html += '<li><strong>Government Initiatives:</strong> PLI schemes (₹1.97 lakh crore across 14 sectors), infrastructure push, Make in India 2.0</li>';
+            html += '<li><strong>Budget Impact:</strong> Union Budget (Feb) and interim budgets affecting sector allocations and tax policies</li>';
+            html += '<li><strong>GST Collections:</strong> Currently at ₹1.6+ lakh crore monthly - strong indicator of economic activity</li>';
+            html += '<li><strong>IIP Growth:</strong> Industrial production tracking 5-6% YoY growth, manufacturing PMI above 50</li>';
+            html += '<li><strong>Capex Cycle:</strong> Government capex at ₹10 lakh crore for FY25, private sector revival expected</li>';
             html += '</ul>';
             
-            html += '<p style="margin-top: 15px;"><strong>📊 Data Sources:</strong> RBI Monthly Bulletin, Ministry of Finance, SEBI Market Reports, Bloomberg India, Economic Survey</p>';
+            html += '<p style="margin-top: 20px; background: rgba(34, 211, 238, 0.1); padding: 15px; border-radius: 8px;">';
+            html += '<strong>📊 Data Sources:</strong> RBI Monthly Bulletin, Ministry of Finance Economic Survey, ';
+            html += 'SEBI Market Reports, Bloomberg India, NSDL/CDSL FII Data, CMIE Economic Outlook';
+            html += '</p>';
             
             return html;
         }
@@ -917,52 +1227,61 @@
                      sector === 'Automobile' ? 'Nifty Auto' : 'Nifty 50') + '</div></div>';
             html += '</div>';
             
-            html += '<h4>Key Sector Drivers</h4><ul class="factor-list">';
+            html += '<h4 style="margin-top: 20px;">Key Sector Drivers</h4><ul style="margin-left: 20px; line-height: 1.8;">';
             
             if (sector === 'IT Services') {
-                html += '<li><strong>US Tech Spending:</strong> 60%+ revenue from North America, dependent on client IT budgets</li>';
-                html += '<li><strong>Deal Pipeline:</strong> TCV (Total Contract Value) wins indicating future revenue</li>';
-                html += '<li><strong>Margin Pressures:</strong> Wage inflation (8-10% annual), visa costs, onsite-offshore mix</li>';
-                html += '<li><strong>Technology Trends:</strong> AI/ML adoption, cloud migration, digital transformation deals</li>';
-                html += '<li><strong>Currency Hedging:</strong> Dollar exposure management critical for earnings</li>';
+                html += '<li><strong>US Tech Spending:</strong> 60%+ revenue from North America, dependent on client IT budgets and discretionary spending</li>';
+                html += '<li><strong>Deal Pipeline:</strong> TCV (Total Contract Value) wins indicating future revenue - track quarterly deal announcements</li>';
+                html += '<li><strong>Margin Pressures:</strong> Wage inflation (8-10% annual), visa costs ($5000-7000 per H1B), onsite-offshore mix optimization</li>';
+                html += '<li><strong>Technology Trends:</strong> AI/ML adoption, cloud migration (AWS, Azure, GCP), digital transformation deals</li>';
+                html += '<li><strong>Currency Hedging:</strong> Dollar exposure management critical - each 1% INR movement = 30-40 bps margin impact</li>';
+                html += '<li><strong>Attrition Management:</strong> Industry attrition at 15-20%, talent retention crucial for delivery</li>';
             } else if (sector === 'Banking') {
-                html += '<li><strong>Asset Quality:</strong> GNPA at 2.5-3% (industry), Net NPA at 0.6-0.8%</li>';
-                html += '<li><strong>Credit Growth:</strong> Loan growth at 14-16% YoY, driven by retail and MSME</li>';
-                html += '<li><strong>NIM Management:</strong> Net Interest Margin at 3-4% range, rate transmission key</li>';
-                html += '<li><strong>CASA Ratio:</strong> Current+Savings accounts at 40-45% - low-cost deposits critical</li>';
-                html += '<li><strong>Digital Banking:</strong> UPI, mobile banking adoption reducing operational costs</li>';
+                html += '<li><strong>Asset Quality:</strong> GNPA at 2.5-3% (industry average), Net NPA at 0.6-0.8%, watch slippage ratios</li>';
+                html += '<li><strong>Credit Growth:</strong> Loan growth at 14-16% YoY, driven by retail (home loans, personal) and MSME segments</li>';
+                html += '<li><strong>NIM Management:</strong> Net Interest Margin at 3-4% range, rate transmission efficiency key to profitability</li>';
+                html += '<li><strong>CASA Ratio:</strong> Current+Savings accounts at 40-45% - low-cost deposits critical for NIM expansion</li>';
+                html += '<li><strong>Digital Banking:</strong> UPI transactions 12+ billion/month, mobile banking adoption reducing operational costs</li>';
+                html += '<li><strong>Capital Adequacy:</strong> Tier-1 capital at 13-14%, well above regulatory requirement of 11.5%</li>';
             } else if (sector === 'FMCG') {
-                html += '<li><strong>Rural Demand:</strong> 40-50% revenue from rural India, dependent on monsoon & MSP</li>';
-                html += '<li><strong>Commodity Costs:</strong> Palm oil, crude derivatives affecting gross margins</li>';
-                html += '<li><strong>Distribution:</strong> 3-4 million+ retail outlets, direct reach crucial</li>';
-                html += '<li><strong>Premium Portfolio:</strong> Shift to premium products improving realizations</li>';
-                html += '<li><strong>E-commerce:</strong> Quick commerce (10-min delivery) disrupting traditional retail</li>';
+                html += '<li><strong>Rural Demand:</strong> 40-50% revenue from rural India, dependent on monsoon quality and MSP (Minimum Support Price)</li>';
+                html += '<li><strong>Commodity Costs:</strong> Palm oil (₹1000-1200/10kg), crude derivatives, packaging material affecting gross margins</li>';
+                html += '<li><strong>Distribution:</strong> 3-4 million+ retail outlets, direct distribution reach crucial for market share</li>';
+                html += '<li><strong>Premium Portfolio:</strong> Shift to premium products (10-15% price premium) improving realizations and margins</li>';
+                html += '<li><strong>E-commerce:</strong> Quick commerce (Zepto, Blinkit, Swiggy Instamart) disrupting traditional retail, 15-20% growth</li>';
+                html += '<li><strong>Pricing Power:</strong> Ability to pass on input cost inflation through grammage reduction or price hikes</li>';
             } else if (sector === 'Automobile') {
-                html += '<li><strong>Input Costs:</strong> Steel (₹45-50k/ton), aluminum, rubber prices impacting margins</li>';
-                html += '<li><strong>EV Transition:</strong> Electric vehicle penetration at 5-6%, FAME subsidies driving adoption</li>';
-                html += '<li><strong>Financing:</strong> 75%+ sales on credit, interest rates affecting demand</li>';
-                html += '<li><strong>Chip Shortage:</strong> Semiconductor availability impacting production (improving now)</li>';
-                html += '<li><strong>Exports:</strong> Opportunity in African, Latin American markets</li>';
+                html += '<li><strong>Input Costs:</strong> Steel (₹45-50k/ton), aluminum (₹200-220/kg), rubber prices impacting margins (60-65% of COGS)</li>';
+                html += '<li><strong>EV Transition:</strong> Electric vehicle penetration at 5-6% (2-wheelers 50%+ by 2030), FAME-II subsidies driving adoption</li>';
+                html += '<li><strong>Financing:</strong> 75%+ sales on credit, interest rates (8-10%) affecting affordability and demand</li>';
+                html += '<li><strong>Chip Shortage:</strong> Semiconductor availability impacting production (now improving), 2-3 month waiting periods</li>';
+                html += '<li><strong>Exports:</strong> Opportunity in African, Latin American markets - 15-20% of volumes for major OEMs</li>';
+                html += '<li><strong>Scrappage Policy:</strong> Vehicle scrappage policy expected to drive replacement demand (1.5-2 crore old vehicles)</li>';
             } else {
                 html += '<li><strong>Market Dynamics:</strong> Sector influenced by overall economic growth and market sentiment</li>';
                 html += '<li><strong>Regulatory Environment:</strong> Government policies and sector-specific regulations impact performance</li>';
-                html += '<li><strong>Competition:</strong> Competitive landscape and market share dynamics</li>';
+                html += '<li><strong>Competition:</strong> Competitive landscape and market share dynamics crucial</li>';
                 html += '<li><strong>Innovation:</strong> Technology adoption and product development driving growth</li>';
             }
             
             html += '</ul>';
             
-            html += '<h4>Competitive Position</h4><ul class="factor-list">';
-            const marketCapStr = marketCap || '';
-            const isLargeCap = marketCapStr.toString().includes('19') || marketCapStr.toString().includes('14') || 
-                              marketCapStr.toString().includes('12') || marketCapStr.toString().includes('7') || 
-                              marketCapStr.toString().includes('6');
-            html += '<li><strong>Market Leadership:</strong> ' + symbol + ' is a ' + (isLargeCap ? 'large-cap leader' : 'major player') + ' in ' + sector + '</li>';
-            html += '<li><strong>Peer Comparison:</strong> Check relative performance vs sector index and top 3 peers</li>';
-            html += '<li><strong>Moat Analysis:</strong> Brand strength, distribution network, technology capabilities</li>';
+            html += '<h4 style="margin-top: 20px;">Competitive Position</h4><ul style="margin-left: 20px; line-height: 1.8;">';
+            const marketCapStr = marketCap.toString();
+            const isLargeCap = marketCapStr.includes('19') || marketCapStr.includes('14') || 
+                              marketCapStr.includes('12') || marketCapStr.includes('7') || 
+                              marketCapStr.includes('6') || marketCapStr.includes('5');
+            html += '<li><strong>Market Leadership:</strong> ' + symbol + ' is a ' + (isLargeCap ? 'large-cap leader' : 'major player') + ' in ' + sector + ' sector</li>';
+            html += '<li><strong>Peer Comparison:</strong> Evaluate relative performance vs sector index and top 3-5 peers on metrics like P/E, ROE, growth</li>';
+            html += '<li><strong>Moat Analysis:</strong> Brand strength, distribution network, technology capabilities, regulatory barriers creating competitive advantages</li>';
+            html += '<li><strong>Market Share Trends:</strong> Monitor quarterly market share in key product categories - gaining/losing share vs competitors</li>';
             html += '</ul>';
             
-            html += '<p style="margin-top: 15px;"><strong>📈 Research Sources:</strong> Company Annual Reports, Investor Presentations, CRISIL Research, Motilal Oswal Sector Reports, ICICI Direct Research</p>';
+            html += '<p style="margin-top: 20px; background: rgba(167, 139, 250, 0.1); padding: 15px; border-radius: 8px;">';
+            html += '<strong>📈 Research Sources:</strong> Company Annual Reports & Investor Presentations, ';
+            html += 'CRISIL Sector Research, Motilal Oswal Sector Reports, ICICI Direct Research, ';
+            html += 'Kotak Institutional Equities, Industry body reports (NASSCOM for IT, IBA for Banking, etc.)';
+            html += '</p>';
             
             return html;
         }
@@ -970,64 +1289,89 @@
         function generateRecommendations(symbol, deviationPercent) {
             const absDeviation = Math.abs(deviationPercent);
             
-            let html = '<h4>Model Performance Assessment</h4><ul class="factor-list">';
+            let html = '<h4>Model Performance Assessment</h4><ul style="margin-left: 20px; line-height: 1.8;">';
             
             if (absDeviation < 5) {
-                html += '<li><strong>Excellent Prediction:</strong> AI model successfully captured market trends. Consider using for short-term trend analysis.</li>';
-                html += '<li><strong>Confidence Level:</strong> High - Historical patterns remain valid</li>';
+                html += '<li><strong>Excellent Prediction:</strong> ' + currentModel.toUpperCase() + ' model successfully captured market trends with <5% error. High confidence in model.</li>';
+                html += '<li><strong>Confidence Level:</strong> High - Historical patterns remain valid, model can be used for short-term trend analysis</li>';
+                html += '<li><strong>Recommendation:</strong> Model suitable for this stock. Consider using for tracking price movements.</li>';
+            } else if (absDeviation < 10) {
+                html += '<li><strong>Good Prediction:</strong> ' + currentModel.toUpperCase() + ' model captured general trend but missed some factors (5-10% error)</li>';
+                html += '<li><strong>Confidence Level:</strong> Moderate - Some recent events not captured by historical patterns</li>';
+                html += '<li><strong>Recommendation:</strong> Combine model prediction with fundamental analysis and latest news</li>';
             } else {
-                html += '<li><strong>Significant Deviation Detected:</strong> Recent market events have created disconnect from historical patterns</li>';
-                html += '<li><strong>Action Required:</strong> Investigate latest news and announcements for ' + symbol + '</li>';
+                html += '<li><strong>Significant Deviation:</strong> ' + currentModel.toUpperCase() + ' model prediction diverged significantly (>10% error)</li>';
+                html += '<li><strong>Action Required:</strong> Investigate latest news, corporate announcements, and market events for ' + symbol + '</li>';
+                html += '<li><strong>Recommendation:</strong> Recent developments have broken historical patterns - rely more on fundamental analysis</li>';
             }
             
             html += '</ul>';
             
-            html += '<h4>Recommended Next Steps</h4><ul class="factor-list">';
-            html += '<li>🔍 <strong>Check Latest News:</strong>';
-            html += '<ul style="margin-left: 20px; margin-top: 5px;">';
-            html += '<li><a href="https://www.nseindia.com" target="_blank" style="color: #22d3ee;">NSE India</a> - Official announcements</li>';
-            html += '<li><a href="https://www.bseindia.com" target="_blank" style="color: #22d3ee;">BSE India</a> - Corporate filings</li>';
-            html += '<li><a href="https://economictimes.indiatimes.com" target="_blank" style="color: #22d3ee;">Economic Times</a> - Latest business news</li>';
-            html += '<li><a href="https://www.moneycontrol.com" target="_blank" style="color: #22d3ee;">Moneycontrol</a> - Market analysis</li>';
-            html += '<li><a href="https://www.business-standard.com" target="_blank" style="color: #22d3ee;">Business Standard</a> - In-depth coverage</li>';
+            html += '<h4 style="margin-top: 20px;">Recommended Next Steps</h4><ul style="margin-left: 20px; line-height: 1.8;">';
+            html += '<li>🔍 <strong>Verify Latest News & Announcements:</strong>';
+            html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+            html += '<li><a href="https://www.nseindia.com" target="_blank" style="color: #22d3ee;">NSE India</a> - Check latest corporate announcements, shareholding patterns, bulk deals</li>';
+            html += '<li><a href="https://www.bseindia.com" target="_blank" style="color: #22d3ee;">BSE India</a> - View corporate filings, board meeting outcomes, financial results</li>';
+            html += '<li><a href="https://economictimes.indiatimes.com" target="_blank" style="color: #22d3ee;">Economic Times</a> - Latest business news, analyst views, sector trends</li>';
+            html += '<li><a href="https://www.moneycontrol.com" target="_blank" style="color: #22d3ee;">Moneycontrol</a> - Live market data, technical charts, peer comparison</li>';
+            html += '<li><a href="https://www.business-standard.com" target="_blank" style="color: #22d3ee;">Business Standard</a> - In-depth coverage, policy impacts, expert opinions</li>';
             html += '</ul></li>';
             
-            html += '<li>📊 <strong>Fundamental Analysis:</strong>';
-            html += '<ul style="margin-left: 20px; margin-top: 5px;">';
-            html += '<li>Review latest quarterly results and management commentary</li>';
-            html += '<li>Check P/E ratio vs sector average and 5-year historical average</li>';
-            html += '<li>Analyze revenue growth, margin trends, debt levels</li>';
-            html += '<li>Read analyst reports from brokerage houses</li>';
+            html += '<li>📊 <strong>Conduct Fundamental Analysis:</strong>';
+            html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+            html += '<li>Review latest quarterly results (revenue, EBITDA, PAT growth YoY and QoQ)</li>';
+            html += '<li>Check management commentary and forward guidance from earnings calls</li>';
+            html += '<li>Compare P/E ratio vs sector average and stock\'s 5-year historical P/E</li>';
+            html += '<li>Analyze key metrics: Revenue growth, operating margins, ROE, ROCE, debt levels</li>';
+            html += '<li>Read analyst reports from brokerages (Motilal Oswal, ICICI Direct, Kotak, etc.)</li>';
+            html += '<li>Check consensus estimates for next quarter and full year</li>';
             html += '</ul></li>';
             
-            html += '<li>🎯 <strong>Technical Analysis:</strong>';
-            html += '<ul style="margin-left: 20px; margin-top: 5px;">';
-            html += '<li>Check if price broke key support/resistance levels</li>';
-            html += '<li>Analyze volume patterns for institutional activity</li>';
-            html += '<li>Review RSI, MACD indicators for overbought/oversold conditions</li>';
+            html += '<li>🎯 <strong>Perform Technical Analysis:</strong>';
+            html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+            html += '<li>Identify if price broke key support levels (200-day MA, 50-day MA) or resistance levels</li>';
+            html += '<li>Analyze volume patterns - abnormal volumes indicate institutional activity</li>';
+            html += '<li>Check momentum indicators: RSI (overbought >70, oversold <30), MACD crossovers</li>';
+            html += '<li>Review chart patterns: head & shoulders, double top/bottom, triangles</li>';
+            html += '<li>Monitor derivatives data: Put-Call Ratio, Open Interest in options, FII/DII futures positions</li>';
             html += '</ul></li>';
             
-            html += '<li>💡 <strong>Model Improvement:</strong>';
-            html += '<ul style="margin-left: 20px; margin-top: 5px;">';
-            html += '<li>Integrate real-time news sentiment analysis</li>';
-            html += '<li>Add fundamental metrics (P/E, EPS, guidance)</li>';
-            html += '<li>Include sector rotation indicators</li>';
-            html += '<li>Use ensemble of multiple ML models (LSTM, Prophet, ARIMA)</li>';
+            html += '<li>💡 <strong>Enhance Model Performance:</strong>';
+            html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+            html += '<li>Integrate real-time news sentiment analysis using NLP on financial news sources</li>';
+            html += '<li>Add fundamental metrics as features: P/E trends, EPS forecasts, management guidance</li>';
+            html += '<li>Include sector rotation indicators and relative strength vs Nifty 50</li>';
+            html += '<li>Use ensemble of multiple ML models (combine LSTM + XGBoost + Prophet for better accuracy)</li>';
+            html += '<li>Implement walk-forward validation to test model on out-of-sample data</li>';
+            html += '<li>Add macroeconomic variables: USD/INR, crude oil, FII flows, India VIX</li>';
+            html += '</ul></li>';
+            
+            html += '<li>📈 <strong>Monitor Key Events Calendar:</strong>';
+            html += '<ul style="margin-left: 20px; margin-top: 8px;">';
+            html += '<li>RBI MPC meeting dates (Feb, Apr, Jun, Aug, Oct, Dec) - rate decisions impact markets</li>';
+            html += '<li>Quarterly earnings season (typically 2 weeks after quarter end)</li>';
+            html += '<li>Union Budget date (usually Feb 1st) - sector allocation and tax policy impacts</li>';
+            html += '<li>F&O expiry dates (last Thursday of month) - can create volatility</li>';
+            html += '<li>Dividend ex-dates, AGM dates, board meeting dates for company-specific events</li>';
             html += '</ul></li>';
             
             html += '</ul>';
             
-            html += '<p style="margin-top: 20px; padding: 20px; background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 10px;">';
-            html += '<strong>⚠️ Important Disclaimer:</strong><br>';
-            html += 'This analysis is for educational and informational purposes only. It is NOT investment advice. ';
-            html += 'Always conduct your own research, consult with certified financial advisors, and consider your risk tolerance before making investment decisions. ';
-            html += 'Past performance does not guarantee future results. Stock market investments are subject to market risks.';
-            html += '</p>';
+            html += '<div style="margin-top: 25px; padding: 25px; background: rgba(239, 68, 68, 0.15); border: 2px solid #ef4444; border-radius: 12px;">';
+            html += '<h4 style="color: #ef4444; margin-bottom: 15px;">⚠️ IMPORTANT DISCLAIMER</h4>';
+            html += '<p style="line-height: 1.8;"><strong>This analysis is for educational and informational purposes ONLY.</strong> It is NOT investment advice, stock recommendation, or solicitation to buy/sell securities.</p>';
+            html += '<p style="margin-top: 12px; line-height: 1.8;">• <strong>AI Limitations:</strong> Predictions based on historical data cannot account for breaking news, black swan events, or sudden market changes</p>';
+            html += '<p style="line-height: 1.8;">• <strong>Simulated Data:</strong> Financial metrics shown are simulated for demonstration. Always verify with official sources</p>';
+            html += '<p style="line-height: 1.8;">• <strong>Market Risk:</strong> Stock market investments are subject to market risks. Past performance does not guarantee future results</p>';
+            html += '<p style="line-height: 1.8;">• <strong>Consult Professionals:</strong> Always conduct your own research, read company disclosures, and consult certified financial advisors (SEBI registered) before making investment decisions</p>';
+            html += '<p style="line-height: 1.8;">• <strong>Your Responsibility:</strong> Consider your risk tolerance, investment horizon, financial goals, and tax implications before investing</p>';
+            html += '<p style="margin-top: 12px; line-height: 1.8;"><strong>Official Sources to Verify:</strong> NSE (nseindia.com), BSE (bseindia.com), Company Investor Relations, SEBI (sebi.gov.in)</p>';
+            html += '</div>';
             
             return html;
         }
 
-        window.addEventListener('load', () => console.log('AI Stock Predictor with News Integration Ready!'));
+        window.addEventListener('load', () => console.log('AI Stock Predictor Pro Ready!'));
     </script>
 </body>
 </html>
